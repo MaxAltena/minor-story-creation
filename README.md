@@ -40,4 +40,4 @@ Find it on [https://story-creation.maxaltena.com/][link:story-creation]!
 [link:forks]: https://github.com/MaxAltena/minor-story-creation/forks
 [img:follow-me]: https://img.shields.io/github/followers/maxaltena?style=social&label=Follow%20%40MaxAltena
 [link:follow-me]: https://github.com/MaxAltena
-[link:manifest]: https://story-creation.maxaltena.com/
+[link:story-creation]: https://story-creation.maxaltena.com/
