@@ -6,17 +6,17 @@
 
 ###### [![Watchers][img:watchers]][link:watchers] [![Stars][img:stars]][link:stars] [![Forks][img:forks]][link:forks] [![Follow @MaxAltena][img:follow-me]][link:follow-me]
 
-> The story creation from Max Altena for the Minor Digital Experience Design and the subject Critical Design
+> The story creation project from Max Altena for the Minor Digital Experience Design and the subject Critical Design
 
 Find it on [https://story-creation.maxaltena.com/][link:story-creation]!
 
-[img:netlify-status]: https://img.shields.io/netlify/55511795-9cb3-46a2-a420-a39fd53aa6fc
+[img:netlify-status]: https://img.shields.io/netlify/402581fd-8e75-4ea9-b342-e5f95c3e5e7d
 [link:netlify-status]: https://app.netlify.com/sites/story-creation-maxaltena-com/deploys
-[img:uptimerobot-status]: https://img.shields.io/uptimerobot/status/m786481763-b34c23b3f7cfe848e993aee7
-[img:uptimerobot-ratio]: https://img.shields.io/uptimerobot/ratio/m786481763-b34c23b3f7cfe848e993aee7
-[link:uptimerobot-status]: https://status-school.maxaltena.com/786481763
+[img:uptimerobot-status]: https://img.shields.io/uptimerobot/status/m786883370-816e420a60e5a1a8e1c5bad4
+[img:uptimerobot-ratio]: https://img.shields.io/uptimerobot/ratio/m786883370-816e420a60e5a1a8e1c5bad4
+[link:uptimerobot-status]: https://status-school.maxaltena.com/786883370
 [img:snyk]: https://img.shields.io/snyk/vulnerabilities/github/MaxAltena/minor-story-creation
-[link:snyk]: https://app.snyk.io/org/maxaltena/project/f43920f9-02e2-4d5c-9d88-18a6009a75a4
+[link:snyk]: https://app.snyk.io/org/maxaltena/project/7cc723d9-4561-406a-bb26-a03ef8bc2a77
 [img:github-version]: https://img.shields.io/github/package-json/v/MaxAltena/minor-story-creation
 [link:github-version]: https://github.com/MaxAltena/minor-story-creation
 [img:github-issues]: https://img.shields.io/github/issues/MaxAltena/minor-story-creation
