@@ -1,19 +1,26 @@
-import { AppActions, CHANGE_ONLINE_STATUS, OnlineStatus } from "@/redux/actions";
+import { AppActions, CHANGE_NAME, CHANGE_UID } from "@/redux/actions";
 
 export interface AppState {
-	onlineStatus: OnlineStatus;
+	uid: string;
+	name: string;
 }
 
-export const initialAppState: AppState = {
-	onlineStatus: "UNKNOWN",
+export const initialAppState = {
+	uid: "",
+	name: "",
 };
 
 export default function (state = initialAppState, action: AppActions): AppState {
 	switch (action.type) {
-		case CHANGE_ONLINE_STATUS:
+		case CHANGE_UID:
 			return {
 				...state,
-				onlineStatus: action.onlineStatus,
+				uid: action.uid,
+			};
+		case CHANGE_NAME:
+			return {
+				...state,
+				name: action.name,
 			};
 		default:
 			return state;

@@ -2,27 +2,27 @@ import React, { StrictMode } from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { ConnectedRouter } from "connected-react-router";
-import { Switch, Route } from "react-router-dom";
+import { Normalize } from "styled-normalize";
+import { Reset } from "styled-reset";
+import { ThemeProvider } from "styled-components";
 
-import { configureStore, history } from "@/redux";
-import App from "@/App";
+import { configureStore } from "@/redux";
+import { App } from "@/components";
+import { GlobalStyle, theme } from "@/styles";
 
 const { store, persistor } = configureStore();
 
 render(
 	<StrictMode>
-		<Provider store={store}>
-			<PersistGate loading={<p>Loading...</p>} persistor={persistor}>
-				<ConnectedRouter history={history}>
-					<Switch>
-						<Route path="/:chapter/:story" render={() => <App />} />
-						<Route path="/:chapter" render={() => <App />} />
-						<Route render={() => <App />} />
-					</Switch>
-				</ConnectedRouter>
-			</PersistGate>
-		</Provider>
+		<Reset />
+		<Normalize />
+		<GlobalStyle />
+
+		<ThemeProvider theme={theme}>
+			<Provider store={store}>
+				<PersistGate persistor={persistor}>{bootstrapped => <App bootstrapped={bootstrapped} />}</PersistGate>
+			</Provider>
+		</ThemeProvider>
 	</StrictMode>,
 	document.getElementById("root")
 );

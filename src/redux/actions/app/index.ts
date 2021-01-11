@@ -1,5 +1,9 @@
-import type { ChangeOnlineStatusAction } from "./changeOnlineStatus";
+import type { ChangeUIDAction } from "./changeUID";
+import type { ChangeNameAction } from "./changeName";
 
-export type AppActions = ChangeOnlineStatusAction;
+export type AppActions = ChangeUIDAction | ChangeNameAction;
 
-export * from "./changeOnlineStatus";
+export { default as changeUID } from "./changeUID";
+export * from "./changeUID";
+export { default as changeName } from "./changeName";
+export * from "./changeName";

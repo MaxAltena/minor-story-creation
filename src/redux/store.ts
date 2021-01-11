@@ -3,7 +3,6 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
 import loggerMiddleware from "redux-logger";
 import { persistStore, persistReducer, Persistor } from "redux-persist";
-import hardSet from "redux-persist/lib/stateReconciler/hardSet";
 import localForage from "localforage";
 import { createBrowserHistory } from "history";
 import { routerMiddleware } from "connected-react-router";
@@ -49,7 +48,6 @@ export const configureStore = (
 		{
 			key: "root",
 			storage: localForage,
-			stateReconciler: hardSet,
 			blacklist: ["router"],
 		},
 		createRootReducer(history)
