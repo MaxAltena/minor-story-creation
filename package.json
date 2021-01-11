@@ -23,8 +23,8 @@
 		"eslint": "eslint .",
 		"eslint:fix": "eslint . --fix",
 		"netlify:preview": "netlify build && netlify deploy",
-		"prettier": "prettier **/*",
-		"prettier:fix": "prettier **/* --write",
+		"prettier": "prettier src/**/*",
+		"prettier:fix": "prettier src/**/* --write",
 		"sort-package-json": "sort-package-json",
 		"start": "snowpack dev",
 		"test": "snyk test"

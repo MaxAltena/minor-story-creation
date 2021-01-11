@@ -10,16 +10,16 @@ node_modules
 *.yml
 *.pdf
 *.otf
+*.woff2
 *.jpg
 *.gif
 *.png
 .netlify
 .next
 public
+public/fonts
 .snyk
 
 # Project specific
 dist
-out
-out_publish
-out_functions
+build

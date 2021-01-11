@@ -18,7 +18,7 @@ export const App = ({ bootstrapped }: Props): ReactElement => {
 
 	useEffect(() => {
 		if (bootstrapped && app.uid === "") dispatch(changeUID(uuid()));
-		else if (bootstrapped) setTimeout(() => setLoaded(bootstrapped), 1000);
+		else if (bootstrapped) setTimeout(() => setLoaded(true), 1000);
 		else setLoaded(bootstrapped);
 
 		if (location) {

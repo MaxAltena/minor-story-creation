@@ -1,7 +1,7 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { StyledOverlay } from "./styles";
 
-export const Overlay = () => (
+export const Overlay = (): ReactElement => (
 	<StyledOverlay>
 		<div className="background top"></div>
 		<div className="background right"></div>
