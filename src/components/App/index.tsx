@@ -19,14 +19,12 @@ export const App = ({ bootstrapped }: Props): ReactElement => {
 	useEffect(() => {
 		if (bootstrapped && location) {
 			if (
-				(location.pathname === "/" || location.pathname === "/my-story" || location.pathname === "/settings") &&
+				(location.pathname === "/" || location.pathname === "/story" || location.pathname === "/settings") &&
 				app.name === "" &&
-				app.location === "" &&
+				app.location === "The Netherlands" &&
 				app.year === new Date().getFullYear() + 35
 			)
 				dispatch(push("/getting-started"));
-			if ((location.pathname === "/" || location.pathname === "/getting-started") && app.name !== "")
-				dispatch(push("/my-story"));
 		}
 
 		if (bootstrapped && app.uid === "") dispatch(changeUID(uuid()));
@@ -63,7 +61,7 @@ export const App = ({ bootstrapped }: Props): ReactElement => {
 				<Switch>
 					<Route exact path="/getting-started" render={() => <Book />} />
 					<Route exact path="/settings" render={() => <Book />} />
-					<Route exact path="/my-story" render={() => <Book />} />
+					<Route exact path="/story" render={() => <Book />} />
 					<Route path="/:chapter" render={() => <Book />} />
 					<Route render={() => <Book />} />
 				</Switch>

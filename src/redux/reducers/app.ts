@@ -12,7 +12,7 @@ export interface AppState {
 export const initialAppState: AppState = {
 	uid: "",
 	name: "",
-	location: "",
+	location: "The Netherlands",
 	year: new Date().getFullYear() + 35,
 	color: theme.colors.books.secondary,
 };

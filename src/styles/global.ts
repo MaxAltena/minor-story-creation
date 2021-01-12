@@ -30,7 +30,7 @@ export const GlobalStyle = createGlobalStyle`
 		padding-bottom: 0.25em;
 		color: inherit;
 		text-decoration: none;
-		transition: background-size ease-in-out 150ms;
+		transition: background-size ease-in-out 200ms;
 
 		&:hover,
 		&:active,
@@ -43,8 +43,16 @@ export const GlobalStyle = createGlobalStyle`
 		padding-left: 2em;
 	}
 
-	ul, li {
-		padding-left: 4em;
+	ul {
+		padding-left: 2em;
+	}
+
+	ul > li {
+		list-style: outside;
+	}
+
+	ul > ul > li {
+		list-style: circle;
 	}
 
 	p {

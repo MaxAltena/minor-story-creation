@@ -7,7 +7,7 @@ export const StyledChapterTitle = styled.h2`
 	background-size: 0.5em 0.5em;
 	letter-spacing: 0.125em;
 	margin: 0 0 1em 0;
-	padding: 0.5em 0 1em 0;
+	padding: 1em 0;
 	position: relative;
 	text-align: center;
 	text-transform: uppercase;
@@ -115,7 +115,7 @@ export const StyledCard = styled.div`
 	border: 2px solid rgba(0, 0, 0, 0.75);
 	border-radius: ${({ theme }) => theme.borderRadius.DEFAULT};
 	width: calc(100% - 6em);
-	margin: 1em 3em;
+	margin: 1em 2em;
 	padding: 1em;
 	height: auto;
 	display: flex;
@@ -140,6 +140,37 @@ export const StyledCardRight = styled.div`
 	height: 100%;
 	width: auto;
 	line-height: 2em;
+	flex-grow: 1;
+`;
+
+export const StyledCardChapter = styled(StyledCard)`
+	justify-content: space-between;
+	padding: 0;
+
+	p {
+		text-indent: 0;
+		padding: 1em;
+	}
+
+	a {
+		background: none;
+		border-left: 2px solid rgba(0, 0, 0, 0.75);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-grow: 1;
+		min-width: 5em;
+		padding: 1em;
+		box-shadow: inset 0 0 0 0.2em rgba(0, 0, 0, 0.75);
+		font-weight: bold;
+		transition: box-shadow ease-in-out 200ms;
+
+		&:hover,
+		&:focus,
+		&:active {
+			box-shadow: inset 0 0 0 0.4em rgba(0, 0, 0, 0.75);
+		}
+	}
 `;
 
 /*

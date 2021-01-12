@@ -1,9 +1,11 @@
 import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
+import { Link } from "react-router-dom";
 
 import { BookWrapper } from "@/components";
-import { changeColor, changeLocation, changeName, changeYear, initialAppState, State } from "@/redux";
+import { changeColor, changeLocation, changeName, changeYear, initialAppState, KnowledgeType, State } from "@/redux";
+import { theme } from "@/styles";
 import {
 	StyledChapterTitle,
 	StyledInputContainer,
@@ -15,16 +17,17 @@ import {
 	StyledCardLeft,
 	StyledCardRight,
 	StyledSpan,
+	StyledCardChapter,
 } from "./styles";
-import { theme } from "@/styles";
 
 // Inspired by https://codepen.io/erinesullivan/pen/gxdbzp
 
 export const Book = (): ReactElement => {
 	const app = useSelector((state: State) => state.app);
-	const oldApp = initialAppState;
+	const story = useSelector((state: State) => state.story);
 	const location = useSelector((state: State) => state.router.location);
 	const dispatch = useDispatch();
+	const oldApp = initialAppState;
 
 	const _handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
 		event.preventDefault();
@@ -41,10 +44,11 @@ export const Book = (): ReactElement => {
 		if (formData.location) dispatch(changeLocation(String(formData.location)));
 		if (formData.year) dispatch(changeYear(Number(formData.year)));
 
-		if (app.name) dispatch(push("/my-story"));
+		if (formData.name) dispatch(push("/story"));
 	};
 
 	switch (location.pathname) {
+		default:
 		case "/getting-started":
 			return (
 				<BookWrapper
@@ -52,12 +56,12 @@ export const Book = (): ReactElement => {
 						<>
 							<StyledChapterTitle>Getting started</StyledChapterTitle>
 							<StyledParagraphFirst>
-								Welcome to my story creation project. I,{" "}
+								Welcome to my <mark>story creation</mark> project. I,{" "}
 								<a href="https://maxaltena.com/" target="_blank" rel="noopener noreferrer">
 									Max Altena
 								</a>
-								, worked a ton on this to make you feel the story of the possibly future you called
-								&apos;Detoxers&apos;.
+								, worked out a story with the possible future you in it called{" "}
+								<mark>&apos;Detoxers&apos;</mark>.
 							</StyledParagraphFirst>
 							<StyledParagraph>
 								Don&apos;t forget; any and all choices are final, just like your actual choices in life.
@@ -78,12 +82,18 @@ export const Book = (): ReactElement => {
 					right={
 						<>
 							<StyledParagraph>
-								To get started, fill in some details down below to start choosing your future.
+								To get started, fill in the details down below to start choosing your future.
 							</StyledParagraph>
 							<form onSubmit={_handleSubmit}>
 								<StyledInputContainer>
 									<label htmlFor="name">Name</label>
-									<input type="text" name="name" autoComplete="name" required />
+									<input
+										type="text"
+										name="name"
+										autoComplete="name"
+										required
+										defaultValue={app.name}
+									/>
 								</StyledInputContainer>
 								<StyledInputContainer>
 									<label htmlFor="location">Location</label>
@@ -91,7 +101,9 @@ export const Book = (): ReactElement => {
 										type="text"
 										name="location"
 										value={app.location}
+										defaultValue={app.location}
 										onChange={event => dispatch(changeLocation(event.target.value))}
+										required
 									/>
 								</StyledInputContainer>
 								<StyledInputContainer>
@@ -102,9 +114,10 @@ export const Book = (): ReactElement => {
 										min={new Date().getFullYear()}
 										max={new Date().getFullYear() + 100}
 										step="1"
-										defaultValue={new Date().getFullYear() + 35}
+										defaultValue={app.year}
 										value={app.year}
 										onChange={event => dispatch(changeYear(Number(event.target.value)))}
+										required
 									/>
 								</StyledInputContainer>
 								<StyledInputContainer>
@@ -178,11 +191,9 @@ export const Book = (): ReactElement => {
 									<StyledSpan>
 										{oldApp.location !== app.location ? (
 											<>
-												<s>{oldApp.location === "" ? "United States" : oldApp.location}</s>
-												<sup>{app.location === "" ? "United States" : app.location}</sup>
+												<s>{oldApp.location}</s>
+												<sup>{app.location}</sup>
 											</>
-										) : oldApp.location === "" ? (
-											"United States"
 										) : (
 											oldApp.location
 										)}
@@ -226,6 +237,7 @@ export const Book = (): ReactElement => {
 									defaultValue={app.location}
 									value={app.location}
 									onChange={event => dispatch(changeLocation(event.target.value))}
+									required
 								/>
 							</StyledInputContainer>
 							<StyledInputContainer>
@@ -239,6 +251,7 @@ export const Book = (): ReactElement => {
 									defaultValue={app.year !== 0 ? app.year : new Date().getFullYear() + 35}
 									value={app.year}
 									onChange={event => dispatch(changeYear(Number(event.target.value)))}
+									required
 								/>
 							</StyledInputContainer>
 							<StyledInputContainer>
@@ -271,83 +284,85 @@ export const Book = (): ReactElement => {
 					}
 				/>
 			);
-		case "/my-story":
+		case "/story":
 			return (
 				<BookWrapper
 					left={
 						<>
 							<StyledChapterTitle>Detoxers</StyledChapterTitle>
 							<StyledParagraphFirst>
-								A dairy you experience with Charlie, the main character within the story. You will get
-								to know what people in the future fight for and some want to live for.
+								The story starts here: your central hub of information. You have the knowledge at your
+								disposal that you&apos;ve experienced and gathered throughout the story.
 							</StyledParagraphFirst>
+							<StyledCardChapter>
+								{story.chapter === 1 ? (
+									<>
+										<p>Start with your first chapter</p>
+										<Link to={`/chapter-${story.chapter}`}>Chapter {story.chapter}</Link>
+									</>
+								) : (
+									<>
+										<p>Next up</p>
+										<Link to={`/chapter-${story.chapter}`}>Chapter {story.chapter}</Link>
+									</>
+								)}
+							</StyledCardChapter>
 						</>
 					}
 					right={
 						<>
 							<StyledParagraph>
-								Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maiores voluptatem repellat a
-								eius similique illo atque labore nesciunt sequi id autem fugiat eum esse eaque, nihil
-								tenetur culpa! Non, illo!
+								Getting knowledgable is doable through experiencing the story of{" "}
+								<strong>{app.name}</strong>. For now, you&apos;ve collected the following knowledge:
 							</StyledParagraph>
+							<ul>
+								{Object.entries(story.knowledge).map(
+									(value: [string, Array<string>], index: number) => {
+										const knowledgeType = value[0] as KnowledgeType;
+										let header = "";
+
+										switch (knowledgeType) {
+											case "general":
+												header = "General";
+												break;
+											case "personal":
+												header = "Personal";
+												break;
+											case "character1":
+												header = "Character 1";
+												break;
+											default:
+												header = "Other";
+												break;
+										}
+
+										return (
+											<>
+												<li key={index}>{header} knowledge</li>
+												<ul>
+													{value[1].map((value: string, index: number) => (
+														<li key={index}>{value}</li>
+													))}
+												</ul>
+											</>
+										);
+									}
+								)}
+							</ul>
 						</>
 					}
 				/>
 			);
 		case "/chapter-1":
-			return (
-				<BookWrapper
-					left={
-						<>
-							<StyledChapterTitle>Detoxers</StyledChapterTitle>
-							<StyledParagraphFirst>
-								A dairy you experience with Charlie, the main character within the story. You will get
-								to know what people in the future fight for and some want to live for.
-							</StyledParagraphFirst>
-						</>
-					}
-					right={
-						<>
-							<StyledParagraph>
-								Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maiores voluptatem repellat a
-								eius similique illo atque labore nesciunt sequi id autem fugiat eum esse eaque, nihil
-								tenetur culpa! Non, illo!
-							</StyledParagraph>
-						</>
-					}
-				/>
-			);
 		case "/chapter-2":
+		case "/chapter-3":
 			return (
 				<BookWrapper
 					left={
 						<>
-							<StyledChapterTitle>Detoxers</StyledChapterTitle>
+							<StyledChapterTitle>Chapter 1: Introduction</StyledChapterTitle>
 							<StyledParagraphFirst>
-								A dairy you experience with Charlie, the main character within the story. You will get
-								to know what people in the future fight for and some want to live for.
-							</StyledParagraphFirst>
-						</>
-					}
-					right={
-						<>
-							<StyledParagraph>
-								Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maiores voluptatem repellat a
-								eius similique illo atque labore nesciunt sequi id autem fugiat eum esse eaque, nihil
-								tenetur culpa! Non, illo!
-							</StyledParagraph>
-						</>
-					}
-				/>
-			);
-		default:
-			return (
-				<BookWrapper
-					left={
-						<>
-							<StyledChapterTitle>Detoxers</StyledChapterTitle>
-							<StyledParagraphFirst>
-								A dairy you experience with Charlie, the main character within the story. You will get
+								A diary you experience with Charlie, the main character within the story. You will get
 								to know what people in the future fight for and some want to live for.
 							</StyledParagraphFirst>
 						</>
