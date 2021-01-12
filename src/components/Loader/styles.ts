@@ -42,7 +42,6 @@ export const StyledContainer = styled.div<StyledContainerProps>`
 export const StyledFullpageContainer = styled.div<StyledFullpageContainerProps>`
 	user-select: none;
 	-webkit-user-drag: none;
-	pointer-events: none;
 	width: 100vw;
 	height: 100vh;
 	z-index: 100;

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const StyledOverlay = styled.div`
+import type { StyledOverlayProps } from "./types";
+
+export const StyledOverlay = styled.div<StyledOverlayProps>`
 	box-sizing: border-box;
 	background: transparent;
 	width: 100%;
@@ -175,7 +177,8 @@ export const StyledOverlay = styled.div`
 
 	.book {
 		position: absolute;
-		background: ${({ theme }) => theme.colors.books.secondary};
+		${({ backgroundColor }) => `background: ${backgroundColor};`}
+		transition: background 200ms ease-in-out;
 
 		${({ theme }) => `--border-radius: ${theme.borderRadius.lg};`}
 

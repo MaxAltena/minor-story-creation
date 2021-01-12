@@ -1,25 +1,346 @@
 import React, { ReactElement } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { push } from "connected-react-router";
 
 import { BookWrapper } from "@/components";
-import type { State } from "@/redux";
-import { StyledChapterTitle, StyledParagraph, StyledParagraphFirst } from "./styles";
+import { changeColor, changeLocation, changeName, changeYear, initialAppState, State } from "@/redux";
+import {
+	StyledChapterTitle,
+	StyledInputContainer,
+	StyledInputGroup,
+	StyledParagraph,
+	StyledParagraphFirst,
+	StyledRadioButton,
+	StyledCard,
+	StyledCardLeft,
+	StyledCardRight,
+	StyledSpan,
+} from "./styles";
+import { theme } from "@/styles";
 
 // Inspired by https://codepen.io/erinesullivan/pen/gxdbzp
 
 export const Book = (): ReactElement => {
+	const app = useSelector((state: State) => state.app);
+	const oldApp = initialAppState;
 	const location = useSelector((state: State) => state.router.location);
+	const dispatch = useDispatch();
+
+	const _handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+		event.preventDefault();
+
+		// eslint-disable-next-line
+		// @ts-ignore
+		const elementsArray = [...event.target.elements];
+		const formData = elementsArray.reduce((array, element) => {
+			if (element.name) array[element.name] = element.value;
+			return array;
+		}, {});
+
+		if (formData.name) dispatch(changeName(String(formData.name)));
+		if (formData.location) dispatch(changeLocation(String(formData.location)));
+		if (formData.year) dispatch(changeYear(Number(formData.year)));
+
+		if (app.name) dispatch(push("/my-story"));
+	};
 
 	switch (location.pathname) {
 		case "/getting-started":
-			console.log("getting started");
-			break;
+			return (
+				<BookWrapper
+					left={
+						<>
+							<StyledChapterTitle>Getting started</StyledChapterTitle>
+							<StyledParagraphFirst>
+								Welcome to my story creation project. I,{" "}
+								<a href="https://maxaltena.com/" target="_blank" rel="noopener noreferrer">
+									Max Altena
+								</a>
+								, worked a ton on this to make you feel the story of the possibly future you called
+								&apos;Detoxers&apos;.
+							</StyledParagraphFirst>
+							<StyledParagraph>
+								Don&apos;t forget; any and all choices are final, just like your actual choices in life.
+								(Most of the time)
+							</StyledParagraph>
+							<dl>
+								<dt>
+									<strong>de&bull;tox&bull;er</strong>
+								</dt>
+								<dd>
+									<em>noun</em>
+									<br />a person on detox; somebody attempting to give up drugs or{" "}
+									<i>other unhealthy substances</i>
+								</dd>
+							</dl>
+						</>
+					}
+					right={
+						<>
+							<StyledParagraph>
+								To get started, fill in some details down below to start choosing your future.
+							</StyledParagraph>
+							<form onSubmit={_handleSubmit}>
+								<StyledInputContainer>
+									<label htmlFor="name">Name</label>
+									<input type="text" name="name" autoComplete="name" required />
+								</StyledInputContainer>
+								<StyledInputContainer>
+									<label htmlFor="location">Location</label>
+									<input
+										type="text"
+										name="location"
+										value={app.location}
+										onChange={event => dispatch(changeLocation(event.target.value))}
+									/>
+								</StyledInputContainer>
+								<StyledInputContainer>
+									<label htmlFor="year">Year</label>
+									<input
+										type="number"
+										name="year"
+										min={new Date().getFullYear()}
+										max={new Date().getFullYear() + 100}
+										step="1"
+										defaultValue={new Date().getFullYear() + 35}
+										value={app.year}
+										onChange={event => dispatch(changeYear(Number(event.target.value)))}
+									/>
+								</StyledInputContainer>
+								<StyledInputContainer>
+									<label htmlFor="color">Accent color</label>
+									<StyledInputGroup>
+										<StyledRadioButton
+											type="radio"
+											name="color"
+											value={theme.colors.books.primary}
+											onChange={() => dispatch(changeColor(theme.colors.books.primary))}
+											checked={app.color === theme.colors.books.primary}
+										/>
+										<StyledRadioButton
+											type="radio"
+											name="color"
+											value={theme.colors.books.secondary}
+											onChange={() => dispatch(changeColor(theme.colors.books.secondary))}
+											checked={app.color === theme.colors.books.secondary}
+										/>
+										<StyledRadioButton
+											type="radio"
+											name="color"
+											value={theme.colors.books.tertiary}
+											onChange={() => dispatch(changeColor(theme.colors.books.tertiary))}
+											checked={app.color === theme.colors.books.tertiary}
+										/>
+									</StyledInputGroup>
+								</StyledInputContainer>
+								<StyledInputContainer>
+									<button type="submit">Start story</button>
+								</StyledInputContainer>
+							</form>
+						</>
+					}
+				/>
+			);
 		case "/settings":
-			console.log("settings");
-			break;
-		default:
-			console.log("story path");
+			if (oldApp.name === "") oldApp.name = app.name;
+			if (oldApp.location === "") oldApp.location = app.location;
+			if (oldApp.year === new Date().getFullYear() + 35) oldApp.year = app.year;
 
+			return (
+				<BookWrapper
+					left={
+						<>
+							<StyledChapterTitle>Settings</StyledChapterTitle>
+							<StyledParagraphFirst>
+								Wanting to change your <mark>name</mark>, <mark>location</mark> or the <mark>year</mark>{" "}
+								the story takes place in? You came to the right place to do so.
+							</StyledParagraphFirst>
+							<StyledParagraph>
+								Changing these settings can be done anytime but doesn&apos;t affect any past choices.
+							</StyledParagraph>
+							<StyledCard>
+								<StyledCardLeft>
+									<strong>Name:</strong>
+									<strong>Location:</strong>
+									<strong>Year:</strong>
+								</StyledCardLeft>
+								<StyledCardRight>
+									<StyledSpan>
+										{oldApp.name !== app.name ? (
+											<>
+												<s>{oldApp.name}</s>
+												<sup>{app.name}</sup>
+											</>
+										) : (
+											oldApp.name
+										)}
+									</StyledSpan>
+									<StyledSpan>
+										{oldApp.location !== app.location ? (
+											<>
+												<s>{oldApp.location === "" ? "United States" : oldApp.location}</s>
+												<sup>{app.location === "" ? "United States" : app.location}</sup>
+											</>
+										) : oldApp.location === "" ? (
+											"United States"
+										) : (
+											oldApp.location
+										)}
+									</StyledSpan>
+									<StyledSpan>
+										{oldApp.year !== app.year ? (
+											<>
+												<s>{oldApp.year}</s>
+												<sup>{app.year}</sup>
+											</>
+										) : (
+											oldApp.year
+										)}
+									</StyledSpan>
+								</StyledCardRight>
+							</StyledCard>
+						</>
+					}
+					right={
+						<>
+							<StyledParagraph>
+								Change any settings down below to your heart&apos;s desire.
+							</StyledParagraph>
+							<StyledInputContainer>
+								<label htmlFor="name">Name</label>
+								<input
+									type="text"
+									name="name"
+									autoComplete="name"
+									defaultValue={app.name}
+									value={app.name}
+									onChange={event => dispatch(changeName(event.target.value))}
+									required
+								/>
+							</StyledInputContainer>
+							<StyledInputContainer>
+								<label htmlFor="location">Location</label>
+								<input
+									type="text"
+									name="location"
+									defaultValue={app.location}
+									value={app.location}
+									onChange={event => dispatch(changeLocation(event.target.value))}
+								/>
+							</StyledInputContainer>
+							<StyledInputContainer>
+								<label htmlFor="year">Year</label>
+								<input
+									type="number"
+									name="year"
+									min={new Date().getFullYear()}
+									max={new Date().getFullYear() + 100}
+									step="1"
+									defaultValue={app.year !== 0 ? app.year : new Date().getFullYear() + 35}
+									value={app.year}
+									onChange={event => dispatch(changeYear(Number(event.target.value)))}
+								/>
+							</StyledInputContainer>
+							<StyledInputContainer>
+								<label htmlFor="color">Accent color</label>
+								<StyledInputGroup>
+									<StyledRadioButton
+										type="radio"
+										name="color"
+										value={theme.colors.books.primary}
+										onChange={() => dispatch(changeColor(theme.colors.books.primary))}
+										checked={app.color === theme.colors.books.primary}
+									/>
+									<StyledRadioButton
+										type="radio"
+										name="color"
+										value={theme.colors.books.secondary}
+										onChange={() => dispatch(changeColor(theme.colors.books.secondary))}
+										checked={app.color === theme.colors.books.secondary}
+									/>
+									<StyledRadioButton
+										type="radio"
+										name="color"
+										value={theme.colors.books.tertiary}
+										onChange={() => dispatch(changeColor(theme.colors.books.tertiary))}
+										checked={app.color === theme.colors.books.tertiary}
+									/>
+								</StyledInputGroup>
+							</StyledInputContainer>
+						</>
+					}
+				/>
+			);
+		case "/my-story":
+			return (
+				<BookWrapper
+					left={
+						<>
+							<StyledChapterTitle>Detoxers</StyledChapterTitle>
+							<StyledParagraphFirst>
+								A dairy you experience with Charlie, the main character within the story. You will get
+								to know what people in the future fight for and some want to live for.
+							</StyledParagraphFirst>
+						</>
+					}
+					right={
+						<>
+							<StyledParagraph>
+								Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maiores voluptatem repellat a
+								eius similique illo atque labore nesciunt sequi id autem fugiat eum esse eaque, nihil
+								tenetur culpa! Non, illo!
+							</StyledParagraph>
+						</>
+					}
+				/>
+			);
+		case "/chapter-1":
+			return (
+				<BookWrapper
+					left={
+						<>
+							<StyledChapterTitle>Detoxers</StyledChapterTitle>
+							<StyledParagraphFirst>
+								A dairy you experience with Charlie, the main character within the story. You will get
+								to know what people in the future fight for and some want to live for.
+							</StyledParagraphFirst>
+						</>
+					}
+					right={
+						<>
+							<StyledParagraph>
+								Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maiores voluptatem repellat a
+								eius similique illo atque labore nesciunt sequi id autem fugiat eum esse eaque, nihil
+								tenetur culpa! Non, illo!
+							</StyledParagraph>
+						</>
+					}
+				/>
+			);
+		case "/chapter-2":
+			return (
+				<BookWrapper
+					left={
+						<>
+							<StyledChapterTitle>Detoxers</StyledChapterTitle>
+							<StyledParagraphFirst>
+								A dairy you experience with Charlie, the main character within the story. You will get
+								to know what people in the future fight for and some want to live for.
+							</StyledParagraphFirst>
+						</>
+					}
+					right={
+						<>
+							<StyledParagraph>
+								Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maiores voluptatem repellat a
+								eius similique illo atque labore nesciunt sequi id autem fugiat eum esse eaque, nihil
+								tenetur culpa! Non, illo!
+							</StyledParagraph>
+						</>
+					}
+				/>
+			);
+		default:
 			return (
 				<BookWrapper
 					left={
@@ -44,29 +365,8 @@ export const Book = (): ReactElement => {
 			);
 	}
 
-	return (
-		<>
-			<BookWrapper
-				left={
-					<>
-						<StyledChapterTitle>Detoxers</StyledChapterTitle>
-						<StyledParagraphFirst>
-							A dairy you experience with Charlie, the main character within the story. You will get to
-							know what people in the future fight for and some want to live for.
-						</StyledParagraphFirst>
-					</>
-				}
-				right={
-					<>
-						<StyledParagraph>
-							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maiores voluptatem repellat a eius
-							similique illo atque labore nesciunt sequi id autem fugiat eum esse eaque, nihil tenetur
-							culpa! Non, illo!
-						</StyledParagraph>
-					</>
-				}
-			/>
-			{/*<StyledContainer>
+	{
+		/*<StyledContainer>
 				<section className="book">
 					 <header>
 					<h1>Story Creation - Max Altena</h1>
@@ -172,9 +472,8 @@ export const Book = (): ReactElement => {
 					</ol>
 				</footer>
 				</section>
-			</StyledContainer>*/}
-		</>
-	);
+			</StyledContainer>*/
+	}
 };
 
 export default Book;

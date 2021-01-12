@@ -5,8 +5,9 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Normalize } from "styled-normalize";
 import { Reset } from "styled-reset";
 import { ThemeProvider } from "styled-components";
+import { ConnectedRouter } from "connected-react-router";
 
-import { configureStore } from "@/redux";
+import { configureStore, history } from "@/redux";
 import { App } from "@/components";
 import { GlobalStyle, theme } from "@/styles";
 
@@ -20,7 +21,11 @@ render(
 
 		<ThemeProvider theme={theme}>
 			<Provider store={store}>
-				<PersistGate persistor={persistor}>{bootstrapped => <App bootstrapped={bootstrapped} />}</PersistGate>
+				<ConnectedRouter history={history}>
+					<PersistGate persistor={persistor}>
+						{bootstrapped => <App bootstrapped={bootstrapped} />}
+					</PersistGate>
+				</ConnectedRouter>
 			</Provider>
 		</ThemeProvider>
 	</StrictMode>,
