@@ -10,13 +10,6 @@
 
 Find it on [https://story-creation.maxaltena.com/][link:story-creation]!
 
-## TODO
-
-- [ ] React Router
-- [ ] Redux
-- [ ] Styled Components
-- [ ] Tailwind
-
 [img:netlify-status]: https://img.shields.io/netlify/402581fd-8e75-4ea9-b342-e5f95c3e5e7d
 [link:netlify-status]: https://app.netlify.com/sites/story-creation-maxaltena-com/deploys
 [img:uptimerobot-status]: https://img.shields.io/uptimerobot/status/m786883370-816e420a60e5a1a8e1c5bad4

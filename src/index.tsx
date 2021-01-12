@@ -1,15 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
+import React, { StrictMode } from "react";
+import { render } from "react-dom";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { Normalize } from "styled-normalize";
+import { Reset } from "styled-reset";
+import { ThemeProvider } from "styled-components";
+import { ConnectedRouter } from "connected-react-router";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root'),
+import { configureStore, history } from "@/redux";
+import { App } from "@/components";
+import { GlobalStyle, theme } from "@/styles";
+
+const { store, persistor } = configureStore();
+
+render(
+	<StrictMode>
+		<Reset />
+		<Normalize />
+		<GlobalStyle />
+
+		<ThemeProvider theme={theme}>
+			<Provider store={store}>
+				<ConnectedRouter history={history}>
+					<PersistGate persistor={persistor}>
+						{bootstrapped => <App bootstrapped={bootstrapped} />}
+					</PersistGate>
+				</ConnectedRouter>
+			</Provider>
+		</ThemeProvider>
+	</StrictMode>,
+	document.getElementById("root")
 );
 
-if (import.meta.hot) {
-  import.meta.hot.accept();
-}
+if (import.meta.hot) import.meta.hot.accept();

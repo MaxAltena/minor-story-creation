@@ -1,0 +1,25 @@
+# General
+node_modules
+.eslintignore
+.prettierignore
+.gitignore
+.editorconfig
+.browserslistrc
+.htaccess
+*.min.*
+*.yml
+*.pdf
+*.otf
+*.woff2
+*.jpg
+*.gif
+*.png
+.netlify
+.next
+public
+public/fonts
+.snyk
+
+# Project specific
+dist
+build
