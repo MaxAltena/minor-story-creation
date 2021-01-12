@@ -4,7 +4,16 @@ import { push } from "connected-react-router";
 import { Link } from "react-router-dom";
 
 import { BookWrapper } from "@/components";
-import { changeColor, changeLocation, changeName, changeYear, initialAppState, KnowledgeType, State } from "@/redux";
+import {
+	addKnowledge,
+	changeColor,
+	changeLocation,
+	changeName,
+	changeYear,
+	initialAppState,
+	KnowledgeType,
+	State,
+} from "@/redux";
 import { theme } from "@/styles";
 import {
 	StyledChapterTitle,
@@ -61,7 +70,15 @@ export const Book = (): ReactElement => {
 									Max Altena
 								</a>
 								, worked out a story with the possible future you in it called{" "}
-								<mark>&apos;Detoxers&apos;</mark>.
+								<mark
+									style={{ cursor: "help" }}
+									onClick={() =>
+										dispatch(addKnowledge("Detoxers. Seems like a special term.", "general"))
+									}
+								>
+									&apos;Detoxers&apos;
+								</mark>
+								.
 							</StyledParagraphFirst>
 							<StyledParagraph>
 								Don&apos;t forget; any and all choices are final, just like your actual choices in life.
@@ -74,7 +91,19 @@ export const Book = (): ReactElement => {
 								<dd>
 									<em>noun</em>
 									<br />a person on detox; somebody attempting to give up drugs or{" "}
-									<i>other unhealthy substances</i>
+									<i
+										style={{ cursor: "help" }}
+										onClick={() =>
+											dispatch(
+												addKnowledge(
+													"Substances are king. A single one in particular.",
+													"general"
+												)
+											)
+										}
+									>
+										other unhealthy substances
+									</i>
 								</dd>
 							</dl>
 						</>

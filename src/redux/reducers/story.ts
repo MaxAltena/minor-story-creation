@@ -23,36 +23,37 @@ export default function (state = initialStoryState, action: StoryActions): Story
 		case ADD_KNOWLEDGE:
 			switch (action.knowledgeType) {
 				case "general":
-					return {
-						...state,
-						knowledge: {
-							...state.knowledge,
-							general: [...state.knowledge.general, action.knowledge],
-						},
-					};
+					if (!state.knowledge.general.includes(action.knowledge))
+						return {
+							...state,
+							knowledge: {
+								...state.knowledge,
+								general: [...state.knowledge.general, action.knowledge],
+							},
+						};
+					else return state;
 				case "personal":
-					return {
-						...state,
-						knowledge: {
-							...state.knowledge,
-							personal: [...state.knowledge.personal, action.knowledge],
-						},
-					};
+					if (!state.knowledge.personal.includes(action.knowledge))
+						return {
+							...state,
+							knowledge: {
+								...state.knowledge,
+								personal: [...state.knowledge.personal, action.knowledge],
+							},
+						};
+					else return state;
 				case "character1":
-					return {
-						...state,
-						knowledge: {
-							...state.knowledge,
-							character1: [...state.knowledge.character1, action.knowledge],
-						},
-					};
+					if (!state.knowledge.character1.includes(action.knowledge))
+						return {
+							...state,
+							knowledge: {
+								...state.knowledge,
+								character1: [...state.knowledge.character1, action.knowledge],
+							},
+						};
+					else return state;
 				default:
-					return {
-						...state,
-						knowledge: {
-							...state.knowledge,
-						},
-					};
+					return state;
 			}
 		case CHANGE_CHAPTER:
 			return {
