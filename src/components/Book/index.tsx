@@ -398,24 +398,28 @@ export const Book = (): ReactElement => {
 								will get to know what people in the future fight for and some want to live for.
 							</StyledParagraphFirst>
 							<StyledParagraph>
-								Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maiores voluptatem repellat a
-								eius similique illo atque labore nesciunt sequi id autem fugiat eum esse eaque, nihil
-								tenetur culpa! Non, illo!
+								Detoxers is set in the year {app.year} where big corporations and governments,
+								<span
+									style={{ cursor: "help" }}
+									onClick={() =>
+										dispatch(
+											addKnowledge(
+												"Corpos. The big corporations and governments with control over the media.",
+												"general"
+											)
+										)
+									}
+								>
+									the corpos
+								</span>
+								, control the human population. They do this by controlling what we see and consume on
+								the different medias that exist in this world.
 							</StyledParagraph>
-							<StyledParagraph>
-								Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maiores voluptatem repellat a
-								eius similique illo atque labore nesciunt sequi id autem fugiat eum esse eaque, nihil
-								tenetur culpa! Non, illo!
-							</StyledParagraph>
+							<StyledParagraph>Corpos have encountered some resistance though</StyledParagraph>
 						</>
 					}
 					right={
 						<>
-							<StyledParagraph>
-								Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maiores voluptatem repellat a
-								eius similique illo atque labore nesciunt sequi id autem fugiat eum esse eaque, nihil
-								tenetur culpa! Non, illo!
-							</StyledParagraph>
 							<Link to="/chapter-2" onClick={() => dispatch(changeChapter(2))}>
 								Continue to chapter 2
 							</Link>
