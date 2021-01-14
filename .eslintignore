@@ -19,6 +19,7 @@ node_modules
 public
 public/fonts
 .snyk
+.ncurc
 
 # Project specific
 dist
