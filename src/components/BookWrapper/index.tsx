@@ -13,6 +13,11 @@ export const BookWrapper = ({ left, right }: Props): ReactElement => {
 	const app = useSelector((state: State) => state.app);
 	const location = useSelector((state: State) => state.router.location);
 
+	const _flipPage = (): void => {
+		const audio = new Audio("audio/page-flip.mp3");
+		audio.play();
+	};
+
 	let footerElement1, footerElement2;
 
 	switch (location.pathname) {
@@ -21,7 +26,9 @@ export const BookWrapper = ({ left, right }: Props): ReactElement => {
 		case "/settings":
 			footerElement1 = (
 				<span>
-					<Link to="/story">Story</Link>
+					<Link to="/story" onClick={_flipPage}>
+						Story
+					</Link>
 				</span>
 			);
 			break;
@@ -30,12 +37,16 @@ export const BookWrapper = ({ left, right }: Props): ReactElement => {
 		case "/chapter-3":
 			footerElement1 = (
 				<span>
-					<Link to="/story">Story</Link>
+					<Link to="/story" onClick={_flipPage}>
+						Story
+					</Link>
 				</span>
 			);
 			footerElement2 = (
 				<span>
-					<Link to="/settings">Settings</Link>
+					<Link to="/settings" onClick={_flipPage}>
+						Settings
+					</Link>
 				</span>
 			);
 			break;
@@ -43,7 +54,9 @@ export const BookWrapper = ({ left, right }: Props): ReactElement => {
 			footerElement1 = <span className="space"></span>;
 			footerElement2 = (
 				<span>
-					<Link to="/settings">Settings</Link>
+					<Link to="/settings" onClick={_flipPage}>
+						Settings
+					</Link>
 				</span>
 			);
 			break;
@@ -56,7 +69,9 @@ export const BookWrapper = ({ left, right }: Props): ReactElement => {
 			<StyledContainer>
 				<header>
 					<h1>
-						<Link to="/getting-started">Story Creation – Detoxers</Link>
+						<Link to="/getting-started" onClick={_flipPage}>
+							Story Creation – Detoxers
+						</Link>
 					</h1>
 					<h6>{app.name}</h6>
 				</header>

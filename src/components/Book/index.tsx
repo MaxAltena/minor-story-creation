@@ -29,6 +29,7 @@ import {
 	StyledSpan,
 	StyledCardChapter,
 } from "./styles";
+import { playAudioFile } from "@/utils";
 
 // Inspired by https://codepen.io/erinesullivan/pen/gxdbzp
 
@@ -176,8 +177,10 @@ export const Book = (): ReactElement => {
 										/>
 									</StyledInputGroup>
 								</StyledInputContainer>
-								<StyledInputContainer>
-									<button type="submit">Start story</button>
+								<StyledInputContainer accent={app.color}>
+									<button type="submit" onClick={() => playAudioFile("page-flip")}>
+										Start story
+									</button>
 								</StyledInputContainer>
 							</form>
 						</>
@@ -201,7 +204,7 @@ export const Book = (): ReactElement => {
 							<StyledParagraph>
 								Changing these settings can be done anytime but doesn&apos;t affect any past choices.
 							</StyledParagraph>
-							<StyledCard>
+							<StyledCard accent={app.color}>
 								<StyledCardLeft>
 									<strong>Name:</strong>
 									<strong>Location:</strong>
@@ -324,16 +327,24 @@ export const Book = (): ReactElement => {
 								The story starts here: your central hub of information. You have the knowledge at your
 								disposal that you&apos;ve experienced and gathered throughout the story.
 							</StyledParagraphFirst>
-							<StyledCardChapter>
+							<StyledCardChapter accent={app.color}>
 								{story.chapter === 1 ? (
 									<>
 										<p>Start with your first chapter</p>
-										<Link to={`/chapter-${story.chapter}`}>Chapter {story.chapter}</Link>
+										<Link
+											to={`/chapter-${story.chapter}`}
+											onClick={() => playAudioFile("page-flip")}
+										>
+											Chapter {story.chapter}
+										</Link>
 									</>
 								) : (
 									<>
 										<p>Next up</p>
-										<Link to={`/chapter-${story.chapter >= 4 ? 1 : story.chapter}`}>
+										<Link
+											to={`/chapter-${story.chapter >= 4 ? 1 : story.chapter}`}
+											onClick={() => playAudioFile("page-flip")}
+										>
 											Chapter {story.chapter >= 4 ? 1 : story.chapter}
 										</Link>
 									</>
@@ -398,7 +409,7 @@ export const Book = (): ReactElement => {
 								will get to know what people in the future fight for and some want to live for.
 							</StyledParagraphFirst>
 							<StyledParagraph>
-								Detoxers is set in the year {app.year} where big corporations and governments,
+								Detoxers is set in the year {app.year} where big corporations and governments,{" "}
 								<span
 									style={{ cursor: "help" }}
 									onClick={() =>
@@ -432,7 +443,7 @@ export const Book = (): ReactElement => {
 				<BookWrapper
 					left={
 						<>
-							<StyledChapterTitle>Chapter 2: ---</StyledChapterTitle>
+							<StyledChapterTitle>Chapter 2: The beginning</StyledChapterTitle>
 							<StyledParagraphFirst>First paragraph</StyledParagraphFirst>
 						</>
 					}
@@ -450,7 +461,7 @@ export const Book = (): ReactElement => {
 				<BookWrapper
 					left={
 						<>
-							<StyledChapterTitle>Chapter 3: ---</StyledChapterTitle>
+							<StyledChapterTitle>Chapter 3: The end?</StyledChapterTitle>
 							<StyledParagraphFirst>First paragraph</StyledParagraphFirst>
 						</>
 					}
