@@ -1,5 +1,6 @@
 import { AppActions, CHANGE_COLOR, CHANGE_LOCATION, CHANGE_NAME, CHANGE_UID, CHANGE_YEAR } from "@/redux/actions";
 import { theme } from "@/styles";
+import { playAudioFile } from "@/utils";
 
 export interface AppState {
 	uid: string;
@@ -40,6 +41,8 @@ export default function (state = initialAppState, action: AppActions): AppState 
 				year: action.year,
 			};
 		case CHANGE_COLOR:
+			playAudioFile("air-hit");
+
 			return {
 				...state,
 				color: action.color,

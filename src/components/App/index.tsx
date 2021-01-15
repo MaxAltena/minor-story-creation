@@ -9,6 +9,7 @@ import { State, changeUID } from "@/redux";
 import { Book, FullpageLoader } from "@/components";
 import type { Props } from "./types";
 import { StyledMotionP } from "./styles";
+import { playAudioFile } from "@/utils";
 
 export const App = ({ bootstrapped }: Props): ReactElement => {
 	const [loaded, setLoaded] = useState<boolean>(false);
@@ -28,7 +29,11 @@ export const App = ({ bootstrapped }: Props): ReactElement => {
 		}
 
 		if (bootstrapped && app.uid === "") dispatch(changeUID(uuid()));
-		else if (bootstrapped) setTimeout(() => setLoaded(true), 1000);
+		else if (bootstrapped && !loaded)
+			setTimeout(() => {
+				setLoaded(true);
+				playAudioFile("book-open");
+			}, 1000);
 		else setLoaded(bootstrapped);
 	}, [bootstrapped, app, location]);
 

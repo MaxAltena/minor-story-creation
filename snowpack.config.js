@@ -10,11 +10,6 @@ module.exports = {
 		"@snowpack/plugin-typescript",
 		"@snowpack/plugin-webpack",
 	],
-	install: [],
-	installOptions: {},
-	devOptions: {},
-	buildOptions: {},
-	proxy: {},
 	alias: {
 		"@": "./src",
 	},

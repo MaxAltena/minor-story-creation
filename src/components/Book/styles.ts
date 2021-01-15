@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import type { StyledAccentProps } from "./types";
 
 export const StyledChapterTitle = styled.h2`
 	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCA2NCA2NCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNjQgNjQ7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCiAgICA8Zz4NCiAgICAJPHBhdGggZD0iTTAsMzJMMzIsMGwzMiwzMkwzMiw2NEwwLDMyeiBNOCwzMmwyNCwyNGwyNC0yNEwzMiw4TDgsMzJ6IE0xNiwzMmwxNi0xNmwxNiwxNkwzMiw0OEwxNiwzMnogTTI0LDMybDgsOGw4LThsLTgtOEwyNCwzMnoiIC8+DQogICAgPC9nPg0KPC9zdmc+);
@@ -61,7 +62,7 @@ export const StyledParagraphFirst = styled(StyledParagraph)`
 	}
 `;
 
-export const StyledInputContainer = styled.div`
+export const StyledInputContainer = styled.div<StyledAccentProps>`
 	margin: 0.5em 0 0.5em 3em;
 	max-width: 12em;
 	display: flex;
@@ -78,13 +79,27 @@ export const StyledInputContainer = styled.div`
 	}
 
 	button {
-		margin-top: 1.5em;
+		margin-top: 0.5em;
 		cursor: pointer;
-		padding: 0.5em;
-		border: 2px solid rgba(0, 0, 0, 0.75);
 		border-radius: ${({ theme }) => theme.borderRadius.DEFAULT};
-		background: transparent;
-		font-weight: 800;
+
+		background: none;
+		border: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-grow: 1;
+		min-width: 5em;
+		padding: 0.75em;
+		box-shadow: inset 0 0 0 0.2em ${({ accent }) => accent};
+		font-weight: bold;
+		transition: box-shadow ease-in-out 200ms;
+
+		&:hover,
+		&:focus,
+		&:active {
+			box-shadow: inset 0 0 0 0.4em ${({ accent }) => accent};
+		}
 	}
 `;
 
@@ -111,8 +126,8 @@ export const StyledRadioButton = styled.input`
 	}
 `;
 
-export const StyledCard = styled.div`
-	border: 2px solid rgba(0, 0, 0, 0.75);
+export const StyledCard = styled.div<StyledAccentProps>`
+	border: 2px solid ${({ accent }) => accent};
 	border-radius: ${({ theme }) => theme.borderRadius.DEFAULT};
 	width: calc(100% - 6em);
 	margin: 1em 2em;
@@ -154,21 +169,21 @@ export const StyledCardChapter = styled(StyledCard)`
 
 	a {
 		background: none;
-		border-left: 2px solid rgba(0, 0, 0, 0.75);
+		border-left: 2px solid ${({ accent }) => accent};
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		flex-grow: 1;
 		min-width: 5em;
 		padding: 1em;
-		box-shadow: inset 0 0 0 0.2em rgba(0, 0, 0, 0.75);
+		box-shadow: inset 0 0 0 0.2em ${({ accent }) => accent};
 		font-weight: bold;
 		transition: box-shadow ease-in-out 200ms;
 
 		&:hover,
 		&:focus,
 		&:active {
-			box-shadow: inset 0 0 0 0.4em rgba(0, 0, 0, 0.75);
+			box-shadow: inset 0 0 0 0.4em ${({ accent }) => accent};
 		}
 	}
 `;

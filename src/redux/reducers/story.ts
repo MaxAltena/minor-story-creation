@@ -1,4 +1,5 @@
 import { ADD_KNOWLEDGE, CHANGE_CHAPTER, StoryActions } from "@/redux/actions";
+import { playAudioFile } from "@/utils";
 
 export interface StoryState {
 	knowledge: {
@@ -23,7 +24,9 @@ export default function (state = initialStoryState, action: StoryActions): Story
 		case ADD_KNOWLEDGE:
 			switch (action.knowledgeType) {
 				case "general":
-					if (!state.knowledge.general.includes(action.knowledge))
+					if (!state.knowledge.general.includes(action.knowledge)) {
+						playAudioFile("sparkle");
+
 						return {
 							...state,
 							knowledge: {
@@ -31,9 +34,11 @@ export default function (state = initialStoryState, action: StoryActions): Story
 								general: [...state.knowledge.general, action.knowledge],
 							},
 						};
-					else return state;
+					} else return state;
 				case "personal":
-					if (!state.knowledge.personal.includes(action.knowledge))
+					if (!state.knowledge.personal.includes(action.knowledge)) {
+						playAudioFile("sparkle");
+
 						return {
 							...state,
 							knowledge: {
@@ -41,9 +46,11 @@ export default function (state = initialStoryState, action: StoryActions): Story
 								personal: [...state.knowledge.personal, action.knowledge],
 							},
 						};
-					else return state;
+					} else return state;
 				case "character1":
-					if (!state.knowledge.character1.includes(action.knowledge))
+					if (!state.knowledge.character1.includes(action.knowledge)) {
+						playAudioFile("sparkle");
+
 						return {
 							...state,
 							knowledge: {
@@ -51,11 +58,13 @@ export default function (state = initialStoryState, action: StoryActions): Story
 								character1: [...state.knowledge.character1, action.knowledge],
 							},
 						};
-					else return state;
+					} else return state;
 				default:
 					return state;
 			}
 		case CHANGE_CHAPTER:
+			playAudioFile("page-flip");
+
 			return {
 				...state,
 				chapter: action.chapter,
