@@ -6,7 +6,7 @@
 
 ###### [![Watchers][img:watchers]][link:watchers] [![Stars][img:stars]][link:stars] [![Forks][img:forks]][link:forks] [![Follow @MaxAltena][img:follow-me]][link:follow-me]
 
-> The story creation project from Max Altena for the Minor Digital Experience Design and the subject Critical Design
+> The story creation project from Max Altena for the Minor Digital Experience Design
 
 Find it on [https://story-creation.maxaltena.com/][link:story-creation]!
 
