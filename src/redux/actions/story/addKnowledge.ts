@@ -1,6 +1,6 @@
 import type { StoryActions } from "@/redux/actions";
 
-export type KnowledgeType = "general" | "personal" | "character1";
+export type KnowledgeType = "general" | "personal" | "character1" | "character2";
 
 export const ADD_KNOWLEDGE = "@STORY/ADD_KNOWLEDGE";
 

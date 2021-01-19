@@ -33,6 +33,8 @@ export const BookWrapper = ({ left, right }: Props): ReactElement => {
 			);
 			break;
 		case "/chapter-1":
+		case "/chapter-1/1":
+		case "/chapter-1/2":
 		case "/chapter-2":
 		case "/chapter-3":
 			footerElement1 = (
@@ -75,8 +77,8 @@ export const BookWrapper = ({ left, right }: Props): ReactElement => {
 					</h1>
 					<h6>{app.name}</h6>
 				</header>
-				<StyledContainerSide>{left}</StyledContainerSide>
-				<StyledContainerSide>{right}</StyledContainerSide>
+				<StyledContainerSide accent={app.color}>{left}</StyledContainerSide>
+				<StyledContainerSide accent={app.color}>{right}</StyledContainerSide>
 				<footer>
 					{footerElement1}
 					{footerElement2}

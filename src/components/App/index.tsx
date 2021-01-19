@@ -64,10 +64,6 @@ export const App = ({ bootstrapped }: Props): ReactElement => {
 
 			<motion.div initial={false} animate={{ opacity: loaded ? 1 : 0 }} transition={{ duration: 0.5 }}>
 				<Switch>
-					<Route exact path="/getting-started" render={() => <Book />} />
-					<Route exact path="/settings" render={() => <Book />} />
-					<Route exact path="/story" render={() => <Book />} />
-					<Route path="/:chapter" render={() => <Book />} />
 					<Route render={() => <Book />} />
 				</Switch>
 			</motion.div>
