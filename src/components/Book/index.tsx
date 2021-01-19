@@ -2,17 +2,7 @@ import React, { ReactElement } from "react";
 import { useSelector } from "react-redux";
 
 import type { State } from "@/redux";
-import {
-	Chapter0,
-	Chapter1,
-	Chapter1_choice,
-	Chapter2,
-	Chapter2_choice,
-	Chapter3,
-	GettingStarted,
-	Settings,
-	Story,
-} from "@/pages";
+import { Chapter0, Chapter1, Chapter1_choice, Chapter2, Chapter3, GettingStarted, Settings, Story } from "@/pages";
 
 export const Book = (): ReactElement => {
 	const location = useSelector((state: State) => state.router.location);
@@ -35,10 +25,6 @@ export const Book = (): ReactElement => {
 			return <Chapter1_choice choice={2} />;
 		case "/chapter-2":
 			return <Chapter2 />;
-		case "/chapter-2/1":
-			return <Chapter2_choice choice={1} />;
-		case "/chapter-2/2":
-			return <Chapter2_choice choice={2} />;
 		case "/chapter-3":
 			return <Chapter3 />;
 	}

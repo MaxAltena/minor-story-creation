@@ -126,6 +126,15 @@ export const StyledContainerSide = styled.div<StyledAccentProps>`
 				text-transform: uppercase;
 			}
 		}
+
+		&[data-center] {
+			text-indent: 0;
+			text-align: center;
+		}
+
+		&[data-margin] {
+			margin: 0.5em 0;
+		}
 	}
 
 	div {

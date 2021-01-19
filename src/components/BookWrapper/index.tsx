@@ -36,8 +36,6 @@ export const BookWrapper = ({ left, right }: Props): ReactElement => {
 		case "/chapter-1/1":
 		case "/chapter-1/2":
 		case "/chapter-2":
-		case "/chapter-2/1":
-		case "/chapter-2/2":
 		case "/chapter-3":
 			footerElement1 = (
 				<span>
