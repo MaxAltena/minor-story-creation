@@ -8,4 +8,5 @@ export const StyledMotionP = styled(motion.p)`
 	font-weight: 400;
 	font-size: 1.1em;
 	font-family: ${({ theme }) => theme.font};
+	text-indent: 0;
 `;

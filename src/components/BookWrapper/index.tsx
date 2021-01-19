@@ -75,8 +75,8 @@ export const BookWrapper = ({ left, right }: Props): ReactElement => {
 					</h1>
 					<h6>{app.name}</h6>
 				</header>
-				<StyledContainerSide>{left}</StyledContainerSide>
-				<StyledContainerSide>{right}</StyledContainerSide>
+				<StyledContainerSide accent={app.color}>{left}</StyledContainerSide>
+				<StyledContainerSide accent={app.color}>{right}</StyledContainerSide>
 				<footer>
 					{footerElement1}
 					{footerElement2}

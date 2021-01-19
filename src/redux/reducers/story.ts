@@ -16,7 +16,7 @@ export const initialStoryState: StoryState = {
 		personal: ["I know my name!"],
 		character1: [],
 	},
-	chapter: 1,
+	chapter: 0,
 };
 
 export default function (state = initialStoryState, action: StoryActions): StoryState {
