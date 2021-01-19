@@ -236,6 +236,28 @@ export const StyledContainerSide = styled.div<StyledAccentProps>`
 			line-height: 2em;
 			flex-grow: 1;
 		}
+
+		&.row {
+			display: flex;
+			justify-content: space-between;
+			gap: 4em;
+
+			> a {
+				text-align: center;
+				line-height: 1.2em;
+				background: none;
+				border-radius: 0.25em;
+				padding: 0.5em;
+				box-shadow: inset 0 0 0 0.1em ${({ accent }) => accent};
+				transition: box-shadow ease-in-out 200ms;
+
+				&:hover,
+				&:focus,
+				&:active {
+					box-shadow: inset 0 0 0 0.3em ${({ accent }) => accent};
+				}
+			}
+		}
 	}
 
 	span {

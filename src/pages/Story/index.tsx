@@ -48,38 +48,43 @@ export const Story = (): ReactElement => {
 						For now, you&apos;ve collected the following knowledge:
 					</p>
 					<ul>
-						{Object.entries(story.knowledge).map((value: [string, Array<string>], index: number) => {
-							const knowledgeType = value[0] as KnowledgeType;
-							let header = "";
+						{Object.entries(story.knowledge).map(
+							([type, knowledge]: [string, Array<string>], index: number) => {
+								const knowledgeType = type as KnowledgeType;
+								let header = "";
 
-							switch (knowledgeType) {
-								case "general":
-									header = "General";
-									break;
-								case "personal":
-									header = "Personal";
-									break;
-								case "character1":
-									header = "Character 1";
-									break;
-								default:
-									header = "Other";
-									break;
+								switch (knowledgeType) {
+									case "general":
+										header = "General";
+										break;
+									case "personal":
+										header = "Personal";
+										break;
+									case "character1":
+										header = "Character 1";
+										break;
+									case "character2":
+										header = "Character 2";
+										break;
+									default:
+										header = "Other";
+										break;
+								}
+
+								return (
+									<>
+										<li key={index}>
+											<strong>{header} knowledge</strong>
+										</li>
+										<ul>
+											{knowledge.map((value: string, index: number) => (
+												<li key={index}>{value}</li>
+											))}
+										</ul>
+									</>
+								);
 							}
-
-							return (
-								<>
-									<li key={index}>
-										<strong>{header} knowledge</strong>
-									</li>
-									<ul>
-										{value[1].map((value: string, index: number) => (
-											<li key={index}>{value}</li>
-										))}
-									</ul>
-								</>
-							);
-						})}
+						)}
 					</ul>
 				</>
 			}

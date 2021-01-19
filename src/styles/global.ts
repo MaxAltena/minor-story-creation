@@ -5,6 +5,8 @@ import { theme } from "@/styles";
 export const GlobalStyle = createGlobalStyle`
 	html {
 		background: #101010;
+		overflow-x: hidden;
+		overflow-y: scroll;
 	}
 
 	body {

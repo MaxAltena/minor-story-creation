@@ -4,8 +4,9 @@ import { playAudioFile } from "@/utils";
 export interface StoryState {
 	knowledge: {
 		general: Array<string>;
-		character1: Array<string>;
 		personal: Array<string>;
+		character1: Array<string>;
+		character2: Array<string>;
 	};
 	chapter: number;
 }
@@ -15,6 +16,7 @@ export const initialStoryState: StoryState = {
 		general: [],
 		personal: ["I know my name!"],
 		character1: [],
+		character2: [],
 	},
 	chapter: 0,
 };
@@ -56,6 +58,18 @@ export default function (state = initialStoryState, action: StoryActions): Story
 							knowledge: {
 								...state.knowledge,
 								character1: [...state.knowledge.character1, action.knowledge],
+							},
+						};
+					} else return state;
+				case "character2":
+					if (!state.knowledge.character2.includes(action.knowledge)) {
+						playAudioFile("sparkle");
+
+						return {
+							...state,
+							knowledge: {
+								...state.knowledge,
+								character2: [...state.knowledge.character2, action.knowledge],
 							},
 						};
 					} else return state;

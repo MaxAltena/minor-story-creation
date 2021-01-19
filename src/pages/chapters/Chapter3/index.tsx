@@ -1,11 +1,11 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { BookWrapper } from "@/components";
-import { addKnowledge, changeChapter, State } from "@/redux";
+import { changeChapter, State } from "@/redux";
 
-export const Chapter3 = () => {
+export const Chapter3 = (): ReactElement => {
 	const app = useSelector((state: State) => state.app);
 	const dispatch = useDispatch();
 
@@ -13,14 +13,13 @@ export const Chapter3 = () => {
 		<BookWrapper
 			left={
 				<>
-					<h2>Chapter 3: --</h2>
-					<p data-first>Chapter 3</p>
-				</>
-			}
-			right={
-				<>
+					<h2>Chapter 3: {app.name}&apos;s future</h2>
+					<p>Detoxers: A story about {app.name}</p>
+					<p>
+						<strong>TO BE CONTINUED?</strong>
+					</p>
 					<Link to="/story" onClick={() => dispatch(changeChapter(4))} data-link>
-						End story
+						Back to homepage
 					</Link>
 				</>
 			}
